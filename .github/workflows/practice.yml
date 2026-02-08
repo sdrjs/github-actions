@@ -1,0 +1,11 @@
+name: Practice
+run-name: ${{ github.event.head_commit.message }} by @${{ github.actor }}
+on:
+  push:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Env Build
+        run: echo hello world
