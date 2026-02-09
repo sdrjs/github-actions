@@ -4,6 +4,7 @@ on:
     workflows: ["Practice"]
     branches-ignore:
       - "dev"
+    types: [requested]
 jobs:
   print:
     runs-on: ubuntu-latest
