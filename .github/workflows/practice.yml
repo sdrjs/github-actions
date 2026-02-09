@@ -1,11 +1,19 @@
 name: Practice
-run-name: ${{ github.event.head_commit.message }} by @${{ github.actor }}
+# run-name: ${{ github.event.head_commit.message }} by @${{ github.actor }}
 on:
   push:
+  #   paths:
+  #     - '**.js'
+  #   branches:
+  #   tags:
   workflow_dispatch:
+  # schedule:
+    # - cron: '0/10 * * * *' # запуск каждые 10 минут
+    # - cron: '55 6 9 2 MON' # запуск в понедельник 2 февраля, 6:55 UTC time
 jobs:
-  test:
+  test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Env Build
-        run: echo hello world
+      - name: Every time
+        run: |
+          echo "🕒 Current UTC time: $(date -u)"
