@@ -3,13 +3,15 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  prod-check:
-    if: ${{ github.ref == 'refs/heads/main' }}
+  job1:
+    env: &env_vars # Define the anchor on first use
+      NODE_ENV: production
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying to production server on branch $GITHUB_REF"
-  dev-check:
-    if: ${{ github.ref == 'refs/heads/dev' }}
+      - run: echo "Using production settings - ${{ env.NODE_ENV }}"
+
+  job2:
+    env: *env_vars # Reuse the environment variables
     runs-on: ubuntu-latest
     steps:
-      - run: echo "dev..."
+      - run: echo "Same environment variables here- ${{ env.NODE_ENV }}"
