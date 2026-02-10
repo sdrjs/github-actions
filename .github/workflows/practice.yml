@@ -3,15 +3,11 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  job1:
-    env: &env_vars # Define the anchor on first use
-      NODE_ENV: production
+  job1: &base_job 
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Using production settings - ${{ env.NODE_ENV }}"
+      - run: |
+          echo "Hello world"
+          echo "Yo"
 
-  job2:
-    env: *env_vars # Reuse the environment variables
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Same environment variables here- ${{ env.NODE_ENV }}"
+  job2: *base_job # Reuse the entire job configuration
