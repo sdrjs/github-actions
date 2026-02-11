@@ -1,15 +1,19 @@
-name: Comment when opened
+name: Greeting on variable day
+
 on:
-  issues:
-    types:
-      - opened
+  workflow_dispatch:
+  push:
+
+env:
+  DAY_OF_WEEK: Monday
+
 jobs:
-  comment:
+  greeting_job:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
+    env:
+      Greeting: Hello
     steps:
-      - run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
+      - name: "Say Hello Mona it's Monday"
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE: ${{ github.event.issue.html_url }}
+          First_Name: Mona
