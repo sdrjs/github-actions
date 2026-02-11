@@ -1,13 +1,13 @@
-name: Practice
+name: Comment when opened
 on:
-  workflow_dispatch:
-  push:
+  issues:
+    types:
+      - opened
 jobs:
-  job1: &base_job 
+  comment:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Hello world"
-          echo "Yo"
-
-  job2: *base_job # Reuse the entire job configuration
+      - run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}
